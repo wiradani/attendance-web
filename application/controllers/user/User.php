@@ -77,30 +77,8 @@ class User extends CI_Controller {
 
     public function deleteUser($id){
 
-        //$this->UserModel->deleteUser($id);
-        
-        $token = $this->input->cookie('token');
-        $api_url = api_url."/api/user/UserModel/deleteUser";
-        $data['id'] = $id;
-        $data_string = json_encode($data);
-        $curl = curl_init($api_url);
-
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',
-        'token: Bearer '.$token,
-        'Content-Length: ' . strlen($data_string))
-        );
-
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // Make it so the data coming back is put into a string
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);  // Insert the data
-
-        // Send the request
-        $result = curl_exec($curl);
-
-        // Free up the resources $curl is using
-        curl_close($curl);
+        $this->UserModel->deleteUser($id);
+    
 
 
         redirect('/user/user/index');

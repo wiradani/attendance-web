@@ -11,12 +11,12 @@
 
 
 
-    <!-- <li class="nav-item <?php echo $this->uri->segment(3) == 'showMap' ? 'active': '' ?>">
-        <a class="nav-link" href="<?php echo site_url('admin/overview/showMap') ?>"  onclick="goLogGeneral('Device Map','Open by Sidebar')">
+    <li class="nav-item <?php echo $this->uri->segment(3) == 'atd' ? 'active': '' ?>">
+        <a class="nav-link" href="<?php echo site_url('user/atd/index') ?>" >
             <i class="fa fa-map"></i>
-            <span>Device Map</span>
+            <span>My Attandance</span>
         </a>
-    </li> -->
+    </li>
 
 
 

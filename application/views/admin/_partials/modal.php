@@ -85,10 +85,10 @@
 <!-- <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"> -->
 <div class="modal fade bd-example-modal-lg" id="myModal"  tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
-  <form action="<?php echo site_url('admin/overview/settingSync'); ?>" method="POST">
+  <form action="<?php echo site_url('user/atd/checkIn'); ?>" method="POST">
     <div class="modal-content" >
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">SETTING (EDC SYNC)</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Check IN</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -99,22 +99,24 @@
 			          			<div class="col-12">
 						          	<div class="card" style="margin-bottom: 0px;">
 							            <div style="padding: 15px;">
-										<?php 
-										  $valueParam['priodic'] = $update_param->post_hb_period;
-										  $valueParam['second'] = $update_param->secondary_hb_period;
-							             ?>
+										
 					                      	<div class="item form-group" style="width: 100%;">
-					                        	<label class="control-label" for="name">Interval primary heartbeat<span class="required">* (minutes)</span>
+					                        	<label class="control-label" for="name">Status<span class="required"></span>
 					                        	</label>
 						                        <div class="input-group">
-						                          <input style="text-align: center; width: 100%;" id="periode" class="form-control" name="periode" required="required" type="number" value="<?php echo $valueParam['priodic']?>" >
+													<select name="status" id="status">
+														<option value="WFO">WFO</option>
+														<option value="WFH">WFH</option>
+														<option value="WFA">WFA</option>
+														<option value="etc">etc</option>
+													</select>
 						                        </div>
 					                      	</div>
 
 											  <div class="item form-group" style="width: 100%;">
-													 <label class="control-label" for="name">Interval secondary heartbeat<span class="required">* (minutes)</span>
+													 <label class="control-label" for="name">Desc<span class="required"></span>
 								                        <div class="input-group item form-group">	                            
-								                          	<input style="text-align: center; width: 100%;" id="second" class="form-control" name="second" required="required" type="number" value="<?php echo $valueParam['second']?>" >
+								                          	<input style="text-align: center; width: 100%;" id="desc" class="form-control" name="desc"  type="text"  >
 								                        </div>
 								              </div>
 
@@ -124,40 +126,12 @@
 						          </div>
 				        		</div>
 					    	</div>
-						    <div style="width: 50%;">
-					         	<div class="aParent">
-							    	<div style="width: 100%;">
-					          			<div class="col-12">
-								          	<div class="card" style="margin-bottom: 0px;">
-									            <div style="padding: 15px;">
-
-													<?php 
-														$valueParam['time'] = $update_param->get_config_time;
-													?>
-									             
-
-													<div class="item form-group" style="width: 100%;">
-														<label class="control-label">Daily param synchronize time<span class="required">*</span>
-														</label>
-														<div class="input-group clockpicker item form-group">
-															<input style="text-align: center; width: 100%;" class="form-control" type="text" value="10:30:00" name="time" id="timepickers">
-															<span class="input-group-addon">
-																<span class="glyphicon glyphicon-time"></span>
-															</span>
-														</div>
-													</div>
-								                    
-								              	</div>
-							          		</div>
-					        			</div>
-							    	</div>
-							    </div>
-							</div>
+						   
       <div class="modal-footer">
         <br>
         <br>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button  name="btnUpdateParam" onclick="goLog();" type="submit" class="btn btn-info" >Update</button>
+        <button  name="btnUpdateParam" type="submit" class="btn btn-info" >Submit</button>
       </div>
     </div>
     </form>

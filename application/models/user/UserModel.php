@@ -304,6 +304,56 @@ class UserModel extends CI_Model {
       return $jsonData;
   }
 
+
+  public function getAtd($id){
+
+    $query = $this->db->query("SELECT a.name,a.division, b.* FROM users a JOIN attd B ON a.id=b.user_id WHERE b.user_id = '$id' ORDER BY b.created_at DESC ");
+
+    return $query->result_array();
+
+  }
+
+
+  
+  public function cekCheckIN($id){
+
+    $query = $this->db->query("select * from attd where date(created_at) = CURDATE() AND user_id = '$id' ORDER BY created_at");
+
+    return $query->result_array();
+
+  }
+
+
+
+  public function checkIn($data){
+
+
+    $data = array(
+      'user_id' => $data['id'],
+      'status' => $data['status'],
+      'check_in' => $data['check_in'],
+      'desc_stat' => $data['desc']
+    );
+
+    $this->db->insert('attd', $data);
+
+
+    return $this->db->affected_rows();
+
+
+  }
+
+  public function checkout($id){
+
+    $time = date(" h:i");
+
+    $query = $this->db->query(" UPDATE attd SET check_out = '$time' WHERE date(created_at) = CURDATE() AND user_id = '$id' ") ; 
+
+    return $this->db->affected_rows();
+
+   
+
+  }
    
     
 
