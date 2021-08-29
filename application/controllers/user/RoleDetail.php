@@ -23,7 +23,7 @@
             $data['userdata'] = $session;
             $data['user_info'] = $data['userdata']['user_info'];       
 
-            $data['data'] = $this->RoleDetailModel->getAllRoleDetail($data['user_info']['client_code'],$master);
+            $data['data'] = $this->RoleDetailModel->getAllRoleDetail($data['user_info']->client_code,$master);
             
             
             $this->template->views('admin/access_manage/role_detail',$data);
@@ -42,7 +42,7 @@
         $data['title'] = "New Role Detail";
 
 
-        $data['master'] = $this->RoleMasterModel->getAllRoleMaster($data['user_info']['client_code']);
+        $data['master'] = $this->RoleMasterModel->getAllRoleMaster($data['user_info']->client_code);
         $data['form'] = $this->FormModel->getAllForm();
         $data['client'] = $this->ClientModel->getAllClient();
 
@@ -160,7 +160,7 @@
 
 
         $data['client'] = $this->ClientModel->getAllClient();
-        $data['master'] = $this->RoleMasterModel->getAllRoleMaster($data['user_info']['client_code']);
+        $data['master'] = $this->RoleMasterModel->getAllRoleMaster($data['user_info']->client_code);
         $data['form'] = $this->FormModel->getAllForm();
         $data['data'] = $this->RoleDetailModel->getRoleDetailById($id);
 

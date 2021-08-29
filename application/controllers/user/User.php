@@ -34,7 +34,7 @@ class User extends CI_Controller {
         $session = $this->session->userdata('userdata');
 
         $data['userdata'] = $session;
-        $data['user_info'] = $data['userdata']['user_info'];
+        $data['user_info'] = $data['user_info']->client_code;
         
         $data['title'] = "New User";
 
@@ -58,18 +58,17 @@ class User extends CI_Controller {
             
 
                 $data["password"] = md5($data["password"]);
-                var_dump($data);
-
-            //     $result = $this->UserModel->createUser($data);
-            //     if ($result == 0) {
-            //         $out['status'] = '';
-            //         $out['msg'] = show_err_msg('Error saving new user!', '20px');
-            //     } else {
-            //         $out['status'] = '';
-            //         $out['msg'] = show_succ_msg('Saving new user successfully!', '20px');
-            //     }
+            
+                $result = $this->UserModel->createUser($data);
+                if ($result == 0) {
+                    $out['status'] = '';
+                    $out['msg'] = show_err_msg('Error saving new user!', '20px');
+                } else {
+                    $out['status'] = '';
+                    $out['msg'] = show_succ_msg('Saving new user successfully!', '20px');
+                }
           
-            // echo json_encode($out);
+            echo json_encode($out);
 
       
            
@@ -144,38 +143,16 @@ class User extends CI_Controller {
        
         $id = $this->session->userdata("edit_id");
         $data["id"] = $id;
-        $data_string = json_encode($data);
-
-
-
-        $api = api_url."/api/user/UserModel/updateUser";
-
-        $curl = curl_init($api);
-
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',
-        'token: Bearer '.$token,
-        'Content-Length: ' . strlen($data_string))
-        );
-
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // Make it so the data coming back is put into a string
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);  // Insert the data
-
-        // Send the request
-        $result = curl_exec($curl);
-
-        // Free up the resources $curl is using
-        curl_close($curl);
+        
+        $result = $this->UserModel->update($data,$id);
        
 
-        if ($result != "\"success\"") {
+        if ($result == 0 ) {
             $out['status'] = 'form';
-            $out['msg'] = show_err_msg('Error saving new User! ', '20px');
+            $out['msg'] = show_err_msg('Error update  User! ', '20px');
         } else {
             $out['status'] = '';
-            $out['msg'] = show_succ_msg('Saving new User successfully!', '20px');
+            $out['msg'] = show_succ_msg('update User successfully!', '20px');
         }
 
 
@@ -213,11 +190,11 @@ class User extends CI_Controller {
             $data['status'] = $this->session->userdata('userdata');   
             $val['userdata'] = $session;
             $val['user_info'] = $val['userdata']['user_info'];
-            $id=$val['user_info']['id'];
+            $id=$val['user_info']->id;
 
 
             $data['user'] = $this->UserModel->getUserById($id);
-            $data['rolemaster'] = $this->RoleMasterModel->getAllRoleMaster( $val['user_info']['client_code']);
+            $data['rolemaster'] = $this->RoleMasterModel->getAllRoleMaster( $val['user_info']->client_code);
 
             
             $this->template->views('admin/layout_user/user_profile_edit',$data);
@@ -234,34 +211,10 @@ class User extends CI_Controller {
        
         $id = $this->session->userdata("edit_id");
         $data["id"] = $id;
-        $token = $this->input->cookie('token');
-        $data_string = json_encode($data);        
-
-
-
-        $api = api_url."/api/user/UserModel/updateProfile";
-
-        $curl = curl_init($api);
-
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-        'Content-Type: application/json',
-        'token: Bearer '.$token,
-        'Content-Length: ' . strlen($data_string))
-        );
-
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // Make it so the data coming back is put into a string
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);  // Insert the data
-
-        // Send the request
-        $result = curl_exec($curl);
-
-        // Free up the resources $curl is using
-        curl_close($curl);
        
+        $result = $this->UserModel->update($data,$id);
 
-        if ($result != "\"success\"") {
+        if ($result == 0) {
             $out['status'] = 'form';
             $out['msg'] = show_err_msg('Error saving new User! ', '20px');
         } else {

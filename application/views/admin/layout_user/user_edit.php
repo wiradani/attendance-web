@@ -20,21 +20,21 @@
                         <div class="form-group row">
                             <label class="col-sm-2 control-label label-form">Name</label>
                             <div class="col-sm-10">
-                                <input type="text" name="name" id="name" class="form-control" placeholder="Name"required="" value="<?php echo $user['name'] ?>">
+                                <input type="text" name="name" id="name" class="form-control" placeholder="Name"required="" value="<?php echo $user->name ?>">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 control-label label-form">Username</label>
                             <div class="col-sm-10">
-                                <input type="text" name="username" id="username" class="form-control" placeholder="Username"required="" value="<?php echo $user['username'] ?>">
+                                <input type="text" name="username" id="username" class="form-control" placeholder="Username"required="" value="<?php echo $user->username ?>">
                             </div>
                         </div>
                         
                         <div class="form-group row">
                             <label class="col-sm-2 control-label label-form">Email</label>
                             <div class="col-sm-10">
-                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required="" value="<?php echo $user['email'] ?>" readonly>
+                                <input type="email" name="email" id="email" class="form-control" placeholder="Email" required="" value="<?php echo $user->email ?>" readonly>
                             </div>
                         </div>
                        
@@ -65,27 +65,15 @@
                         <div class="form-group row">
                             <label class="col-sm-2 control-label label-form">Mobile Number</label>
                             <div class="col-sm-10">
-                                <input type="number" min="0" name="mobile_no" id="mobile_no" class="form-control" placeholder="Mobile Number"  value="<?php echo $user['mobile_no'] ?>">
+                                <input type="number" min="0" name="mobile_no" id="mobile_no" class="form-control" placeholder="Mobile Number"  value="<?php echo $user->mobile_no?>">
                             </div>
                         </div>
-                        <div class="form-group row">
-                            <label class="col-sm-2 control-label label-form">User Level</label>
-                            <div class="col-sm-10">
-                                <select class="form-control select2" name="level" id="level" required="" aria-describedby="sizing-addon2">
-                                    <?php foreach ($rolemaster as $row) { ?>
-                                        <option value="<?php echo $row['rm_id'] ?>" 
-										<?php if($row['rm_id'] == $user['rm_id']){?>
-										selected="selected" <?php } ?>>
-                                            <?php echo $row['client_code']." - ".$row['rm_name'] ?></option>
-                                    <?php } ?>
-                                </select>
-                            </div>
-                        </div>
+                        
                     </div>
                     <!-- /.box-body -->
                     <div class="box-footer">
                         <a href="<?php echo site_url('/user/User'); ?>" class="btn btn-danger" style="color:white;">Cancel</a>
-                    <button type="submit" class="btn btn-info" onclick="goLogGeneral('User ','Edit User <?php echo($user['name']) ?>');" >Submit</button>
+                    <button type="submit" class="btn btn-info" onclick="goLogGeneral('User ','Edit User <?php echo($user->name) ?>');" >Submit</button>
                     </div>
                     <!-- /.box-footer -->
                 </form>

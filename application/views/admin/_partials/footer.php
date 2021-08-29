@@ -2,7 +2,7 @@
 <footer class="sticky-footer" style="height: 30px;">
   <div class="container my-auto">
     <div class="copyright text-center my-auto">
-      <strong>Copyright &copy; 2020 <a href="https://pcsindonesia.co.id/" target="_blank">WR</a>.</strong> All rights reserved. <b>v</b>1.0.6
+      <strong>Copyright &copy; 2020 <a href="#" target="_blank">WR</a>.</strong> All rights reserved. <b>v</b>1.0.0
     </div>
   </div>
 </footer>

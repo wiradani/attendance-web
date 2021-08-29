@@ -33,6 +33,7 @@
                           <th class="th-middle" style="width: 10%">Username</th>
                           <th class="th-middle" style="width: 10%">Email</th>
                           <th class="th-middle" style="width: 10%">Role</th>
+                          <th class="th-middle" style="width: 10%">Division</th>
                          
                             <th class="th-middle" style="width: 12%">Action</th>
                          
@@ -46,6 +47,7 @@
                           <td class="th-middle"><?php echo $data[$i]['username'] ?></td>
                           <td class="th-middle"><?php echo $data[$i]['email'] ?></td>
                           <td class="th-middle"><?php echo $data[$i]['client_code'].' - '.$data[$i]['rm_name'] ?></td>
+                          <td class="th-middle"><?php echo $data[$i]['division'] ?></td>
                          
                           <td class="th-middle">
                         

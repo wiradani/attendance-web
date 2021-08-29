@@ -15,7 +15,7 @@ class UserModel extends CI_Model {
     public function getAllUser($code){
 
       $query = $this->db->query("
-      SELECT id, name,email,password,a.rm_id,mobile_no,username, b.rm_name, b.client_code FROM `users` as a
+      SELECT id, name,email,password,a.rm_id,mobile_no,username, b.rm_name, b.client_code,a.division FROM `users` as a
       LEFT JOIN role_master as b ON b.rm_id = a.rm_id ORDER by name
      ");
 
@@ -44,15 +44,41 @@ class UserModel extends CI_Model {
 
     public function createUser($data){
 
-      $result = $this->db->insert('users',array("name"=>$data['name'],
-      "email"=>$data['email'], 
-      "username"=>$data['username'], 
-      "password"=>$data['password'], 
-      "rm_id"=>$data['rm_id'], 
-      "mobile_no"=>$data['mobile_no'])); 
 
-      return $result;
+      $data = array(
+        'name' => $data['name'],
+        'email' => $data['email'],
+        'username' => $data['username'],
+        'password' => $data['password'],
+        'rm_id' => $data['level'],
+        'mobile_no' => $data['mobile_no'],
+        'division' => $data['division']
+      );
 
+      $this->db->insert('users', $data);
+
+
+      return $this->db->affected_rows();
+
+
+    }
+
+
+    public function update($data,$id){
+      $data = array(
+        'name' => $data['name'],
+       
+        'username' => $data['username'],
+        'password' => $data['password'],
+       
+        'mobile_no' => $data['mobile_no'],
+       
+      );
+
+      $this->db->where('id', $id);
+      $this->db->update('users', $data);
+
+      return $this->db->affected_rows();
 
     }
 
@@ -60,32 +86,13 @@ class UserModel extends CI_Model {
     public function getUserById($id){
 
       $data['id'] = $id;
-      $data_string = json_encode($data);
-      $token = $this->input->cookie('token');
-      $api = api_url."/api/user/UserModel/getUserById";
-
-      $curl = curl_init($api);
-
-      curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "POST");
-
-      curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-      'Content-Type: application/json',
-      'token: Bearer '.$token,
-      'Content-Length: ' . strlen($data_string))
-      );
-
-      curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);  // Make it so the data coming back is put into a string
-      curl_setopt($curl, CURLOPT_POSTFIELDS, $data_string);  // Insert the data
-
-      // Send the request
-      $result = curl_exec($curl);
-
-      // Free up the resources $curl is using
-      curl_close($curl);
-      $jsonData = json_decode($result,true);
-
-
-      return $jsonData['data'];
+      $query = $this->db->query("
+          SELECT id,username, name,email,password,a.rm_id, mobile_no,	postition, b.rm_name FROM `users` as a
+          LEFT JOIN role_master as b ON b.rm_id = a.rm_id 
+          WHERE id = ".$id);
+          $result =  $query->row();
+      
+          return $result;
 
     }
 
