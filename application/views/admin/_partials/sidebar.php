@@ -41,9 +41,9 @@
             <?php if(strtolower($user_info->client_code) === "pcs"){ ?>
                 <a class="dropdown-item" href="<?php echo site_url('user/Client/index') ?>" onclick="goLogGeneral('Manage Client','Open by Sidebar')" >Manage Client</a>
             <?php } ?> -->
-            <?php if($level === "superadmin" || $acc_rmaster['have_access'] ){ ?>
+            <!-- <?php if($level === "superadmin" || $acc_rmaster['have_access'] ){ ?>
                 <a class="dropdown-item" href="<?php echo site_url('user/RoleMaster/index') ?>" onclick="goLogGeneral('Manage Role','Open by Sidebar')">Manage Role</a>
-            <?php } ?>
+            <?php } ?> -->
         </div>
     </li>
     <?php } ?>
